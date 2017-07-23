@@ -1,7 +1,8 @@
-import { takeLatest, put } from 'redux-saga/effects';
+import { all, takeLatest, put, select } from 'redux-saga/effects';
 import { validMoney, errorMessages, format } from '../constants';
+import { getBank } from '../selectors';
 
-function checkMoney(action) {
+function validateMoney(action) {
   const { money } = action.payload;
   if (validMoney.indexOf(money) === -1) {
     throw new Error(errorMessages.INVALID_MONEY(`Inserted ${format(money)}`));
@@ -11,7 +12,7 @@ function checkMoney(action) {
 function* addMoney(action) {
   console.log('Adding money:', action);
   try {
-    checkMoney(action);
+    validateMoney(action);
 
     const { money } = action.payload;
     yield put({ type: 'ADD_MONEY_SUCCESS', money });
@@ -21,6 +22,15 @@ function* addMoney(action) {
   }
 }
 
+function* checkout(action) {
+  const bank = yield select(getBank);
+  console.log('Checkout:', action.payload.item, bank);
+  //TODO: Continue here
+}
+
 export default function* saga() {
-  yield takeLatest('ADD_MONEY', addMoney);
+  yield all([
+    takeLatest('ADD_MONEY', addMoney),
+    takeLatest('CHECKOUT', checkout),
+  ]);
 }

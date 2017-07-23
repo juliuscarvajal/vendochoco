@@ -11,7 +11,7 @@ const Denomination = props =>
   />;
 
 const Denominations = props => denominations.map(d => (
-  <Denomination id={d.id} value={d.value} {...props} responsive />
+  <Denomination key={d.id} id={d.id} value={d.value} {...props} responsive />
 ));
 
 const Money = props => (

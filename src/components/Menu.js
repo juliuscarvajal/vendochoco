@@ -14,7 +14,7 @@ const Item = props => (
 );
 
 const Products = props => products.map(p => (
-  <Item id={p.id} name={p.name} value={p.value} {...props} responsive />
+  <Item key={p.id} id={p.id} name={p.name} value={p.value} {...props} responsive />
 ));
 
 const Menu = props => (
