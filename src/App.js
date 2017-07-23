@@ -11,9 +11,6 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1>The Vendo Choco</h1>
         </div>
-        <p className="App-intro">
-          To get started, insert your hard earned coins then choose from the wide range of chocolates on display.
-        </p>
         <VendingMachine />
       </div>
     );
