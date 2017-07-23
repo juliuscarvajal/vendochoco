@@ -21,3 +21,9 @@ npm i && npm start
 - Unit tests (Not started)
 - e2e tests (Not started)
 - CI/CD (Not started)
+
+Full screen:
+[[https://github.com/juliuscarvajal/vendochoco/blob/master/img/fullscreen.png|alt=fullscreen]]
+
+Responsive:
+[[https://github.com/juliuscarvajal/vendochoco/blob/master/img/responsive.png|alt=responsive]]
