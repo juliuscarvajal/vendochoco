@@ -23,7 +23,7 @@ npm i && npm start
 - CI/CD (Not started)
 
 Full screen:
-[[https://github.com/juliuscarvajal/vendochoco/blob/master/img/fullscreen.png|alt=fullscreen]]
+[[https://github.com/juliuscarvajal/vendochoco/blob/master/fullscreen.png|alt=fullscreen]]
 
 Responsive:
-[[https://github.com/juliuscarvajal/vendochoco/blob/master/img/responsive.png|alt=responsive]]
+[[https://github.com/juliuscarvajal/vendochoco/blob/master/responsive.png|alt=responsive]]
