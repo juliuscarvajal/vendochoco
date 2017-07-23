@@ -22,8 +22,9 @@ npm i && npm start
 - e2e tests (Not started)
 - CI/CD (Not started)
 
-Full screen:
-[[https://github.com/juliuscarvajal/vendochoco/blob/master/fullscreen.png|alt=fullscreen]]
+### Full screen:
+![fullscreen](https://github.com/juliuscarvajal/vendochoco/blob/master/fullscreen.png)
 
-Responsive:
-[[https://github.com/juliuscarvajal/vendochoco/blob/master/responsive.png|alt=responsive]]
+
+### Responsive:
+![responsive](https://github.com/juliuscarvajal/vendochoco/blob/master/responsive.png)
