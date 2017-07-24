@@ -12,4 +12,6 @@ export const validMoney = [
 
 export const errorMessages = {
   INVALID_MONEY: additionalMsg => `Accepted denominations are ${validMoney.map(format).join(', ')}. ${additionalMsg}`,
+  INVALID_PRODUCT: additionalMsg => `Product is invalid. ${additionalMsg}`,
+  INSUFFICIENT_FUNDS: additionalMsg => `Insufficient funds to make the purchase. ${additionalMsg}`,
 };

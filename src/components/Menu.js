@@ -10,6 +10,7 @@ const Item = props => (
     onClick={() => props.onSelect(props.id)}
   >
     <h2>{`${props.name} (${format(props.value)})`}</h2>
+    { props.menu.error && <h3>{props.menu.error}</h3> }
   </Thumbnail>
 );
 
@@ -26,6 +27,7 @@ const Menu = props => (
 const mapStateToProps = (state, props) => {
   return {
     bank: state.bank,
+    menu: state.menu,
   };
 }
 

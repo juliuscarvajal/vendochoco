@@ -1,20 +1,21 @@
 import { all, takeLatest, put, select } from 'redux-saga/effects';
 import { validMoney, errorMessages, format } from '../constants';
+import { products } from '../external-data';
 import { getBank } from '../selectors';
 
-function validateMoney(action) {
-  const { money } = action.payload;
+function validateMoney(money) {
+  // Check for invalid denomination
   if (validMoney.indexOf(money) === -1) {
-    throw new Error(errorMessages.INVALID_MONEY(`Inserted ${format(money)}`));
+    throw new Error(errorMessages.INVALID_MONEY(`Inserted ${format(money)}.`));
   }
 }
 
 function* addMoney(action) {
-  console.log('Adding money:', action);
   try {
-    validateMoney(action);
-
     const { money } = action.payload;
+
+    validateMoney(money);
+    yield put({ type: 'RESET_ERRORS' });
     yield put({ type: 'ADD_MONEY_SUCCESS', money });
 
   } catch(err) {
@@ -22,10 +23,33 @@ function* addMoney(action) {
   }
 }
 
-function* checkout(action) {
+function validateProduct(item) {
+  const matchedProduct = products.filter(p => p.id === item);
+  if (matchedProduct.length !== 1) {
+    throw new Error(errorMessages.INVALID_PRODUCT(`Selected ${item}.`));
+  }
+
+  return matchedProduct[0];
+}
+
+function* validatePurchase(item, product) {
   const bank = yield select(getBank);
-  console.log('Checkout:', action.payload.item, bank);
-  //TODO: Continue here
+  if (bank.money < product.value) {
+    throw new Error(errorMessages.INSUFFICIENT_FUNDS(`You've got ${bank.money} but the price of the item is ${product.value}`));
+  }
+}
+
+function* checkout(action) {
+  try {
+    const { item } = action.payload;
+    const product = validateProduct(item);
+
+    yield validatePurchase(item, product);
+    yield put({ type: 'CHECKOUT_SUCCESS', item });
+
+  } catch(err) {
+    yield put({ type: 'CHECKOUT_FAILED', error: err.message });
+  }
 }
 
 export default function* saga() {

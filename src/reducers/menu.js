@@ -1,16 +1,14 @@
 import omit from 'lodash/omit';
 
-const initialState = {
-  money: 0.0,
-};
+const initialState = {};
 
 export default(state = initialState, payload) => {
   switch (payload.type) {
-    case 'ADD_MONEY_SUCCESS':
+    case 'CHECKOUT_SUCCESS':
       return {
-        money: state.money + payload.money,
+        item: payload.item,
       };
-    case 'ADD_MONEY_FAILED':
+    case 'CHECKOUT_FAILED':
       return {
         ...state,
         error: payload.error,
