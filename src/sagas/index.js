@@ -45,7 +45,7 @@ function* checkout(action) {
     const product = validateProduct(item);
 
     yield validatePurchase(item, product);
-    yield put({ type: 'CHECKOUT_SUCCESS', item });
+    yield put({ type: 'CHECKOUT_SUCCESS', payload: { item, value: product.value }});
 
   } catch(err) {
     yield put({ type: 'CHECKOUT_FAILED', error: err.message });

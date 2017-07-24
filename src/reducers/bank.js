@@ -15,6 +15,10 @@ export default(state = initialState, payload) => {
         ...state,
         error: payload.error,
       };
+    case 'CHECKOUT_SUCCESS':
+      return {
+        money: state.money - payload.value,
+      };
     case 'RESET_ERRORS':
       return omit(state, ['error']);
     default:
