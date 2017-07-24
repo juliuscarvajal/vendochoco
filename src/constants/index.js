@@ -1,6 +1,7 @@
 import numeral from 'numeral';
 
 export const format = value => numeral(value).format('$0,0.00');
+export const decimal = (value, toFixed = 2) => Number(value.toFixed(toFixed)); //Force 2 decimals
 
 export const validMoney = [
   0.1,

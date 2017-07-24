@@ -1,8 +1,12 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import reducers from './reducers';
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 export default initialState => (...middlewares) => createStore(
-  reducers,
+  reducers, /* preloadedState, */
   initialState,
-  applyMiddleware(...middlewares)
+  composeEnhancers(
+    applyMiddleware(...middlewares)
+  ),
 );

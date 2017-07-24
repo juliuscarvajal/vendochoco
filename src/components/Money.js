@@ -11,11 +11,12 @@ const Denomination = props =>
   />;
 
 const Denominations = props => denominations.map(d => (
-  <Denomination key={d.id} id={d.id} value={d.value} {...props} responsive />
+  <Denomination {...props} key={d.id} id={d.id} value={d.value} responsive />
 ));
 
 const Money = props => (
   <div>
+    <h2>Step 1: Put in money by clicking on the coins</h2>
     { Denominations(props) }
   </div>
 );

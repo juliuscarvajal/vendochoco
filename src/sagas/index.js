@@ -1,5 +1,5 @@
 import { all, takeLatest, put, select } from 'redux-saga/effects';
-import { validMoney, errorMessages, format } from '../constants';
+import { validMoney, errorMessages, format, decimal } from '../constants';
 import { products } from '../external-data';
 import { getBank } from '../selectors';
 
@@ -16,7 +16,7 @@ function* addMoney(action) {
 
     validateMoney(money);
     yield put({ type: 'RESET_ERRORS' });
-    yield put({ type: 'ADD_MONEY_SUCCESS', money });
+    yield put({ type: 'ADD_MONEY_SUCCESS', money: decimal(money) });
 
   } catch(err) {
     yield put({ type: 'ADD_MONEY_FAILED', error: err.message });
@@ -34,21 +34,23 @@ function validateProduct(item) {
 
 function* validatePurchase(item, product) {
   const bank = yield select(getBank);
-  if (bank.money < product.value) {
-    throw new Error(errorMessages.INSUFFICIENT_FUNDS(`You've got ${bank.money} but the price of the item is ${product.value}`));
+  if (decimal(bank.money) < decimal(product.value)) {
+    throw new Error(errorMessages.INSUFFICIENT_FUNDS(`You've got ${format(bank.money)} but the price of the item is ${format(product.value)}`));
   }
 }
 
 function* checkout(action) {
+  const { item } = action.payload;
+
   try {
-    const { item } = action.payload;
     const product = validateProduct(item);
 
     yield validatePurchase(item, product);
-    yield put({ type: 'CHECKOUT_SUCCESS', payload: { item, value: product.value }});
+    yield put({ type: 'RESET_ERRORS' });
+    yield put({ type: 'CHECKOUT_SUCCESS', product });
 
   } catch(err) {
-    yield put({ type: 'CHECKOUT_FAILED', error: err.message });
+    yield put({ type: 'CHECKOUT_FAILED', item, error: err.message });
   }
 }
 

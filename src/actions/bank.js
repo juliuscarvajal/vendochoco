@@ -1,3 +1,3 @@
-export const refund = () => ({
-  type: 'REFUND',
+export const cashOut = () => ({
+  type: 'CASH_OUT',
 });

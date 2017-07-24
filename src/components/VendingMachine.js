@@ -7,27 +7,33 @@ import Bank from './Bank';
 import Menu from './Menu';
 import * as moneyActions from '../actions/money';
 import * as menuActions from '../actions/menu';
+import * as bankActions from '../actions/bank';
 
-const VendingMachine = (props) => {
-  return <Grid fluid>
+const VendingMachine = props =>
+  <Grid fluid>
     <Row>
-      <h2>Step 1: Put in money by clicking on the coins</h2>
       <Money onSelect={props.moneyActions.addMoney}/>
-      <Bank />
-      <h2> Step 2: Choose your chocolate bar</h2>
-      <Menu onSelect={props.menuActions.checkOut}/>
+      <Bank onCashOut={props.bankActions.cashOut} bank={props.bank}/>
+      <Menu onSelect={props.menuActions.checkOut} menu={props.menu}/>
     </Row>
   </Grid>;
-};
+
+const mapStateToProps = (state, props) => {
+  return {
+    bank: state.bank,
+    menu: state.menu,
+  };
+}
 
 const mapDispatchToProps = (dispatch) => {
   return {
     moneyActions: bindActionCreators(moneyActions, dispatch),
-    menuActions: bindActionCreators(menuActions, dispatch)
-  }
+    menuActions: bindActionCreators(menuActions, dispatch),
+    bankActions: bindActionCreators(bankActions, dispatch),
+  };
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(VendingMachine);
