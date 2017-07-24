@@ -8,12 +8,10 @@ npm i && npm start
 
 ## Features:
 - Click on coins to input money
-- Click on image to checkout (Work In Progress: 50%)
-- Refund (Not started)
-- Checkout/Splash image of item (Not started)
-- Reset to initial stage after checkout (Not started)
-- Purchase after checkout (For Improvement)
--- For ease of implementation, checkout is direct purchase at this stage
+- Click on image to checkout
+- Refund/Cash out
+- Checkout/Show selected item
+- Reset to initial stage after checkout
 
 ## Tech stack:
 - Used create-react-app to kick start the project (https://github.com/facebookincubator/create-react-app)
