@@ -16,7 +16,7 @@ const Denominations = props => denominations.map(d => (
 
 const Money = props => (
   <div>
-    <h2>Step 1: Put in money by clicking on the coins</h2>
+    <h2>Step 1: Put in money by pressing on the coins</h2>
     { Denominations(props) }
   </div>
 );

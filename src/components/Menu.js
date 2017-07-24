@@ -27,21 +27,20 @@ const Products = props => products.map(p => (
 const Selected = props => {
   const { product } = props.menu;
   return product && <div>
-    <h2>Enjoy your snack. Have a nice day!</h2>
+    <h1>Enjoy your snack. Have a nice day!</h1>
     <Item {...props} id={product.id} name={product.name} value={product.value} responsive />
   </div>;
 };
 
+const Selections = props => {
+  return <div>
+    <h2> Step 2: Choose your chocolate bar</h2>
+    { Products(props) }
+  </div>;
+};
+
 const Menu = props => (
-  <div>
-    {
-      Selected(props) ||
-      <div>
-        <h2> Step 2: Choose your chocolate bar</h2>
-        { Products(props) }
-      </div>
-    }
-  </div>
+  <div> { Selected(props) || Selections(props) } </div>
 );
 
 export default Menu;
